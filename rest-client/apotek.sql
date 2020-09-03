@@ -1,0 +1,269 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 01 Agu 2020 pada 13.42
+-- Versi server: 10.3.16-MariaDB
+-- Versi PHP: 7.3.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `apotek`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `admin`
+--
+
+CREATE TABLE `admin` (
+  `id_admin` int(3) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nama` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `username`, `password`, `nama`) VALUES
+(1, 'lanaseptiana', '12345', 'Lana Septiana');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detail_pemesanan`
+--
+
+CREATE TABLE `detail_pemesanan` (
+  `id` int(4) NOT NULL,
+  `kode_pesan` varchar(7) NOT NULL,
+  `id_obat` char(5) NOT NULL,
+  `jumlah` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `detail_pemesanan`
+--
+
+INSERT INTO `detail_pemesanan` (`id`, `kode_pesan`, `id_obat`, `jumlah`) VALUES
+(1, '8X60SSU', 'A0001', 1),
+(2, '8X60SSU', 'A0002', 20),
+(6, '2GH3B48', 'A0001', 26),
+(7, '2GH3B48', 'A0002', 33),
+(8, '2GH3B48', 'C0001', 13),
+(9, 'FAVEJLI', 'B0002', 30),
+(10, 'FAVEJLI', 'C0001', 25),
+(11, 'FAVEJLI', 'A0004', 30),
+(12, 'Q6X46CZ', 'A0001', 15),
+(13, 'Q6X46CZ', 'A0003', 20),
+(14, 'Q6X46CZ', 'C0001', 10),
+(15, 'UBEV4VC', 'A0001', 200),
+(16, 'UBEV4VC', 'A0002', 10),
+(18, 'S244QXZ', 'D0001', 20),
+(19, 'S244QXZ', 'A0004', 10),
+(21, 'HACW9GN', 'D0001', 5),
+(22, 'HACW9GN', 'A0001', 20),
+(24, 'SWWY31J', 'C0001', 10),
+(25, 'VKMKVUA', 'A0001', 1),
+(26, 'VKMKVUA', 'A0002', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `keranjang`
+--
+
+CREATE TABLE `keranjang` (
+  `id` int(4) NOT NULL,
+  `kode_obat` char(5) NOT NULL,
+  `jumlah` int(3) NOT NULL,
+  `id_session` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `keranjang`
+--
+
+INSERT INTO `keranjang` (`id`, `kode_obat`, `jumlah`, `id_session`) VALUES
+(21, 'A0001', 10, 'aysho3ajxv6ounnldf3k9n47sr68sxlspz5aqwkx'),
+(22, 'A0002', 20, 'aysho3ajxv6ounnldf3k9n47sr68sxlspz5aqwkx');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `obat`
+--
+
+CREATE TABLE `obat` (
+  `id_obat` char(5) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `bentuk` varchar(100) NOT NULL,
+  `konsumen` varchar(100) NOT NULL,
+  `manfaat` varchar(200) NOT NULL,
+  `harga` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `obat`
+--
+
+INSERT INTO `obat` (`id_obat`, `nama`, `bentuk`, `konsumen`, `manfaat`, `harga`) VALUES
+('A0001', 'Acarbose', 'Tablet, Kapsul', ' Dewasa', 'Mengontrol kadar gula dalam darah', 5000),
+('A0002', 'Albumin', 'Obat infus', ' Dewasa', 'Menangani defisiensi albumin', 10000),
+('A0003', 'Amfetamin', 'Tablet, kapsul, dan puyer', 'Dewasa dan Anak-Anak', 'Menangani ADHD, mengobati narkolepsi, menurunkan berat badan', 12500),
+('A0004', 'Atenolol', 'Tablet', 'Dewasa', 'Mengobati angina, gangguan detak jantung, dan hipertensi. Menjaga kesehatan jantung Menjaga kesehatan jantu setelah serangan jantung', 25000),
+('A1022', 'Aspirin', 'Kapsul, Tablet', ' Dewasa dan Anak-Anak', 'Test', 17000),
+('B0001', 'Bacitracin', 'Suntik', 'Dewasa dan Anak-Anak', 'Mencegah infeksi bakteri pada luka ringan di kulit', 15000),
+('B0002', 'Baclofen', 'Tablet', ' Dewasa dan Anak-Anak', 'Meredakan kejang otot', 32000),
+('C0001', 'Captopril', 'Tablet', 'Dewasa', 'Menangani hipertensi, mencegah komplikasi setelah serangan jantung', 52000),
+('D0001', 'Diazepam', 'Tablet, Obat cair, Suntikan', 'Dewasa dan Anak-Anak', 'Mengatasi insomnia, serangan kecemasan, melemaskan otot kejang', 12000);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pembeli`
+--
+
+CREATE TABLE `pembeli` (
+  `id` varchar(20) NOT NULL,
+  `nama` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pembeli`
+--
+
+INSERT INTO `pembeli` (`id`, `nama`) VALUES
+('21120116120002', 'Kemal Yusron Hasibuan'),
+('21120116130037', 'Ali Sajidin'),
+('21120116130065', 'Adam Maulidani'),
+('21120116140069', 'Fajar Nahari'),
+('21120116140070', 'Azizah Kamalia'),
+('21120116140077', 'Kelvin John'),
+('21120116140078', 'Jeremy Kharisma'),
+('312412421415', 'Lana Septiana');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pemesanan`
+--
+
+CREATE TABLE `pemesanan` (
+  `kode_pesan` varchar(7) NOT NULL,
+  `id_pemesan` varchar(20) NOT NULL,
+  `harga` float NOT NULL,
+  `tanggal` date NOT NULL,
+  `status` enum('L','B') NOT NULL DEFAULT 'L',
+  `konfirmasi` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pemesanan`
+--
+
+INSERT INTO `pemesanan` (`kode_pesan`, `id_pemesan`, `harga`, `tanggal`, `status`, `konfirmasi`) VALUES
+('2GH3B48', '21120116140070', 1136000, '2020-07-27', 'L', '2020-07-27'),
+('8X60SSU', '21120116140068', 205000, '2020-07-27', 'L', '2020-07-27'),
+('FAVEJLI', '21120116140069', 3010000, '2020-07-27', 'L', '2020-07-27'),
+('HACW9GN', '21120116140078', 160000, '2020-07-27', 'B', NULL),
+('Q6X46CZ', '21120116120002', 845000, '2020-06-10', 'L', '2020-07-27'),
+('S244QXZ', '21120116140077', 490000, '2020-07-27', 'B', NULL),
+('SWWY31J', '21120116130065', 520000, '2020-07-27', 'B', NULL),
+('UBEV4VC', '21120116130037', 1100000, '2020-07-27', 'B', NULL),
+('VKMKVUA', '312412421415', 15000, '2020-07-27', 'L', '2020-07-27');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indeks untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id_admin`);
+
+--
+-- Indeks untuk tabel `detail_pemesanan`
+--
+ALTER TABLE `detail_pemesanan`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kode_obat` (`id_obat`),
+  ADD KEY `kode_pesan` (`kode_pesan`);
+
+--
+-- Indeks untuk tabel `keranjang`
+--
+ALTER TABLE `keranjang`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `kode_obat` (`kode_obat`);
+
+--
+-- Indeks untuk tabel `obat`
+--
+ALTER TABLE `obat`
+  ADD PRIMARY KEY (`id_obat`);
+
+--
+-- Indeks untuk tabel `pembeli`
+--
+ALTER TABLE `pembeli`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `pemesanan`
+--
+ALTER TABLE `pemesanan`
+  ADD PRIMARY KEY (`kode_pesan`);
+
+--
+-- AUTO_INCREMENT untuk tabel yang dibuang
+--
+
+--
+-- AUTO_INCREMENT untuk tabel `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id_admin` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT untuk tabel `detail_pemesanan`
+--
+ALTER TABLE `detail_pemesanan`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT untuk tabel `keranjang`
+--
+ALTER TABLE `keranjang`
+  MODIFY `id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+--
+
+--
+-- Ketidakleluasaan untuk tabel `detail_pemesanan`
+--
+ALTER TABLE `detail_pemesanan`
+  ADD CONSTRAINT `detail_pemesanan_ibfk_1` FOREIGN KEY (`id_obat`) REFERENCES `obat` (`id_obat`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `detail_pemesanan_ibfk_2` FOREIGN KEY (`kode_pesan`) REFERENCES `pemesanan` (`kode_pesan`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
